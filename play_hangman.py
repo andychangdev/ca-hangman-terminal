@@ -62,11 +62,15 @@ def play_hangman():
     print(" ".join(user_progress))
     available_letters = "abcdefghijklmnopqrstuvwxyz"
     lives = 7
-    user_guess, lives = input_guess(available_letters, secret_letters, lives)
-    print(user_guess)
-    print(lives)
-    user_progress = update_progress(user_progress, secret_letters, user_guess)
-    available_letters = update_available_letters(user_guess, available_letters)
-    print(available_letters)
+    while "_" in user_progress:
+        user_guess, lives = input_guess(available_letters, secret_letters, lives)
+        user_progress = update_progress(user_progress, secret_letters, user_guess)
+        available_letters = update_available_letters(user_guess, available_letters)
+        if "".join(user_progress) == secret_word:
+            print("\nCongratulations! You have guessed the word! You win!")
+            break
+        if lives == 0:
+            print(f"\nYou are out of luck! You lose!\nThe secret word was {secret_word.capitalize()}!\n")
+            break
 
 play_hangman()
