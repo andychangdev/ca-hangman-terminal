@@ -53,15 +53,14 @@ def play_hangman():
     secret_letters = {}
     for index, letter in enumerate(secret_word):
         secret_letters[index] = letter
-
+        
     print(f"\nWelcome to Hangman!\n")
     print(f"\nYour word is {len(secret_letters)} letters long.")
-    print(secret_word)
-    print(secret_letters)
     user_progress = ["_"] * len(secret_letters)
     print(" ".join(user_progress))
     available_letters = "abcdefghijklmnopqrstuvwxyz"
     lives = 7
+
     while "_" in user_progress:
         user_guess, lives = input_guess(available_letters, secret_letters, lives)
         user_progress = update_progress(user_progress, secret_letters, user_guess)
@@ -72,5 +71,16 @@ def play_hangman():
         if lives == 0:
             print(f"\nYou are out of luck! You lose!\nThe secret word was {secret_word.capitalize()}!\n")
             break
+    
+    while True:
+        restart = input("Do you want to play again?\nEnter your selection (yes/no): ").lower()
+        if restart == "yes":
+            play_hangman()
+            break
+        elif restart == "no":
+            print("\nBack to Main Menu...\n")
+            break
+        else:
+            print("\nInvalid input. Please enter a valid option (yes/no).\n")
 
 play_hangman()
