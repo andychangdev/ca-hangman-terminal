@@ -33,6 +33,20 @@ def input_guess(available_letters, secret_letters, lives):
     return user_guess, lives
 
 
+def update_progress(user_progress, secret_letters, user_guess):
+    for position, letter in secret_letters.items():
+        if user_guess == letter:
+            user_progress[position] = letter
+            print("\nYour guess is correct!\n")
+    print(" ".join(user_progress))
+    return user_progress
+
+
+def update_available_letters(user_guess, available_letters):
+    available_letters = available_letters.replace(user_guess, "")
+    return available_letters
+
+
 def play_hangman():
     words = get_wordlist()
     secret_word = random_word_generator(words)
@@ -51,6 +65,8 @@ def play_hangman():
     user_guess, lives = input_guess(available_letters, secret_letters, lives)
     print(user_guess)
     print(lives)
-
+    user_progress = update_progress(user_progress, secret_letters, user_guess)
+    available_letters = update_available_letters(user_guess, available_letters)
+    print(available_letters)
 
 play_hangman()
