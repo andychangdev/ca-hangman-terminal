@@ -1,8 +1,10 @@
 import random
 
 
-def get_wordlist():
-    with open("wordlist.txt", "r") as file:
+def get_active_wordlist():
+    with open("active_wordlist.txt", "r") as active_file:
+        active_wordlist = active_file.read()
+    with open(active_wordlist, "r") as file:
         words = file.read().splitlines()
     return words
 
@@ -48,7 +50,7 @@ def update_available_letters(user_guess, available_letters):
 
 
 def play_hangman():
-    words = get_wordlist()
+    words = get_active_wordlist()
     secret_word = random_word_generator(words)
     secret_letters = {}
     for index, letter in enumerate(secret_word):

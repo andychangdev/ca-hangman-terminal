@@ -1,1 +1,1 @@
-dictionary/easy/easy_wordlist.txt
+wordlists/easy/easy_wordlist.txt
