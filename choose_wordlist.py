@@ -6,6 +6,7 @@ def choose_wordlist():
     selected_wordlist_filepath = select_wordlist(selected_difficulty)
     with open("active_wordlist.txt", 'w') as file:
         file.write(selected_wordlist_filepath)
-    print(f"Wordlist saved")
+    print(f"\nWordlist saved!")
+    print(f"\nBack to Main Menu...")
 
 
