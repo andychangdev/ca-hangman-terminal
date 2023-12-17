@@ -54,6 +54,3 @@ def choose_wordlist():
     print(f"Wordlist saved")
 
 
-choose_wordlist()
-
-

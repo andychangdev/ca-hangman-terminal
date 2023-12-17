@@ -1,3 +1,6 @@
+from play_hangman import play_hangman
+from choose_wordlist import choose_wordlist
+
 print("Welcome to Hangman!\n")
 
 def display_menu():
@@ -13,10 +16,10 @@ while True:
     choice = input("\nEnter your selection (1-5): ")
 
     if choice == '1':
-        print("\nPlaying Hangman...\n")
+        play_hangman()
         display_menu()
     elif choice == '2':
-        print("\nSelecting Wordlist...\n")
+        choose_wordlist()
         display_menu()
     elif choice == '3':
         print("\nModifying Wordlist...\n")

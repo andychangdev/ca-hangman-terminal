@@ -84,5 +84,3 @@ def play_hangman():
             break
         else:
             print("\nInvalid input. Please enter a valid option (yes/no).\n")
-
-play_hangman()
