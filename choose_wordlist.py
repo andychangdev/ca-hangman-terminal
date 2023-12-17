@@ -27,9 +27,7 @@ def select_wordlist(difficulty):
 
     if selected_difficulty:
         folder_path = os.path.join('wordlists', selected_difficulty)
-        print(f"folder_path:{folder_path}")
         wordlists = os.listdir(folder_path)
-        print(f"wordlists:{wordlists}")
 
         print(f"Select from available {selected_difficulty} wordlists:")
         for index, wordlist in enumerate(wordlists, start=1):
@@ -40,9 +38,7 @@ def select_wordlist(difficulty):
                 selection = int(selection)
                 if 1 <= selection <= len(wordlists):
                     selected_wordlist = wordlists[selection - 1]
-                    print(f"Selected_wordlist: {selected_wordlist}")
                     wordlist_filepath = os.path.join(folder_path, selected_wordlist)
-                    print(f"Wordlist_filepath: {wordlist_filepath}")
                     return wordlist_filepath
                 else:
                     print("Invalid input. Please select a valid wordlist number.")
@@ -53,8 +49,9 @@ def select_wordlist(difficulty):
 def choose_wordlist():
     selected_difficulty = select_difficulty()
     selected_wordlist_filepath = select_wordlist(selected_difficulty)
-    print(f"Selected difficulty: {selected_difficulty}")
-    print(f"Selected wordlist filepath: {selected_wordlist_filepath}")
+    with open("active_wordlist.txt", 'w') as file:
+        file.write(selected_wordlist_filepath)
+    print(f"Wordlist saved")
 
 
 choose_wordlist()
