@@ -19,14 +19,14 @@ def select_difficulty():
 
 def select_wordlist(difficulty):
     difficulty_folders = {
-        '1': 'easy',
-        '2': 'medium',
-        '3': 'hard'
+        "1": "easy",
+        "2": "medium",
+        "3": "hard"
     }
     selected_difficulty = difficulty_folders.get(difficulty)
 
     if selected_difficulty:
-        folder_path = os.path.join('wordlists', selected_difficulty)
+        folder_path = os.path.join("wordlists", selected_difficulty)
         wordlists = os.listdir(folder_path)
 
         print(f"\nSelect from available {selected_difficulty} wordlists:")
@@ -44,3 +44,6 @@ def select_wordlist(difficulty):
                     print("\nInvalid input. Please enter a valid wordlist number.")
             except ValueError:
                 print("\nInvalid input. Please enter a valid number.")
+    else:
+        print("Invalid difficulty level selection.")
+        return None
