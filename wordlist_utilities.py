@@ -52,11 +52,11 @@ def prompt_user(instructions):
             answer = inquirer.prompt(prompt)
             user_input = answer["input"]
             if " " in user_input:
-                raise ValueError("Invalid input. Name must not contain spaces.")
+                raise ValueError("Invalid input! Name must not contain spaces.\n")
             elif not user_input.isalpha():
-                raise ValueError("Invalid input. Name must only alphabet letters")
+                raise ValueError("Invalid input! Name must only use alphabet letters.\n")
             elif len(user_input) < 4:
-                raise ValueError("Invalid input. Name must contain atleast 4 letters")
+                raise ValueError("Invalid input! Name must contain atleast 4 letters.\n")
             else:
                 return user_input.lower()
         except ValueError as error:
@@ -114,16 +114,29 @@ def edit_wordlist(filepath):
         selections = inquirer.prompt(prompt)
         user_choice = selections["choice"]
         if user_choice == "Add Word":
-            word = input("Enter the word to add: ")
-            wordlist.append(word)
-            print(f'\n"{word}" added to wordlist\n')
+            while True:
+                word = prompt_user("Enter a word to add (or enter 'quit' to stop adding)")
+                try:
+                    if word in wordlist:
+                        raise Exception (f"Invalid Input! '{word}' already exists in wordlist.\n")
+                    if word == "quit":
+                        break
+                    else:
+                        wordlist.append(word)
+                        print(f"'{word}' added to wordlist.\n")
+                except Exception as error:
+                    print(error)
         elif user_choice == "Remove Word":
-            word = input("Enter the word to remove: ")
-            if word in wordlist:
-                wordlist.remove(word)
-                print(f'\n"{word}" removed from wordlist\n')
-            else:
-                print("Word not found in the list.")
+            while True:
+                word = prompt_user("Enter a word to remove (or enter 'quit' to stop removing)")
+                try:
+                    if word not in wordlist:
+                        raise Exception (f"Error: '{word}' not found in wordlist.\n")
+                    else:
+                        wordlist.remove(word)
+                        print(f"'{word}' removed from wordlist\n")
+                except Exception as error:
+                    print(error)
         elif user_choice == "View Wordlist":
             print("Wordlist:\n")
             display_wordlist_characters(wordlist, 100)
