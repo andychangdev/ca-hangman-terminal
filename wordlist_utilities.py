@@ -43,9 +43,19 @@ def select_wordlist(difficulty):
     except KeyError as error:
         print(f"Error: Invalid selection - {error}")
         return None
-    
+def prompt_user_options(options):
+    prompt = [
+            inquirer.List(
+                "choice",
+                message="Choose an option",
+                choices=options,
+            ),
+        ]
+    selections = inquirer.prompt(prompt)
+    user_choice = selections["choice"]
+    return user_choice
 
-def prompt_user(type, instructions):
+def prompt_user_input(type, instructions):
     while True:
         try:
             prompt = [inquirer.Text("input", message=instructions)]
@@ -93,7 +103,7 @@ def save_new_wordlist(wordlist_folder, wordlist):
     folder_path = os.path.join('wordlists', wordlist_folder)
     existing_wordlists = os.listdir(folder_path)
     while True:
-        wordlist_name = prompt_user("Wordlist name", "Enter a name for your wordlist")
+        wordlist_name = prompt_user_input("Wordlist name", "Enter a name for your wordlist")
         filename = f"{wordlist_name}.txt"
         try:
             if filename in existing_wordlists:
@@ -113,19 +123,11 @@ def edit_wordlist(filepath):
         wordlist = []
 
     while True:
-        prompt = [
-            inquirer.List(
-                "choice",
-                message="Select an option",
-                choices=["Add Word", "Remove Word", "View Wordlist", "Save and Exit"],
-            ),
-        ]
-        
-        selections = inquirer.prompt(prompt)
-        user_choice = selections["choice"]
+        options = ["Add Word", "Remove Word", "View Wordlist", "Save and Exit"]
+        user_choice = prompt_user_options(options)
         if user_choice == "Add Word":
             while True:
-                word = prompt_user("Word", "Enter a word to add (or enter 'quit' to stop adding)")
+                word = prompt_user_input("Word", "Enter a word to add (or enter 'quit' to stop adding)")
                 try:
                     if word in wordlist:
                         raise Exception (f"Error: '{word}' already exists in wordlist.\n")
@@ -138,7 +140,7 @@ def edit_wordlist(filepath):
                     print(error)
         elif user_choice == "Remove Word":
             while True:
-                word = prompt_user("Word", "Enter a word to remove (or enter 'quit' to stop removing)")
+                word = prompt_user_input("Word", "Enter a word to remove (or enter 'quit' to stop removing)")
                 try:
                     if word not in wordlist:
                         raise Exception (f"Error: '{word}' not found in wordlist.\n")
@@ -152,6 +154,9 @@ def edit_wordlist(filepath):
             display_wordlist_characters(wordlist, 100)
             print()
         elif user_choice == "Save and Exit":
-            return wordlist
+            if (len(wordlist)) < 10:
+                print("Error: Wordlist must contain atleast 10 words.\n")
+            else: 
+                return wordlist
         else:
             print("\nError: Invalid selection. Please select a valid option.")
