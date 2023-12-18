@@ -1,35 +1,33 @@
+import inquirer
 from play_hangman import play_hangman
 from choose_wordlist import choose_wordlist
 
-print("Welcome to Hangman!")
+print("\nWelcome to Hangman!\n")
 
 def display_menu():
-    print("\nMenu:")
-    print("1. Play Hangman")
-    print("2. Select Wordlist")
-    print("3. Modify Wordlist")
-    print("4. Create Wordlist")
-    print("5. Exit")
+    while True:
+        prompt = [
+            inquirer.List(
+                "choice",
+                message="Choose an option",
+                choices=["Play Hangman", "Select Wordlist", "Modify Wordlist", "Create Wordlist", "Exit"],
+            ),
+        ]
+        selections = inquirer.prompt(prompt)
+        user_choice = selections["choice"]
+
+        if user_choice == "Play Hangman":
+            play_hangman()
+        elif user_choice == "Select Wordlist":
+            choose_wordlist()
+        elif user_choice == "Modify Wordlist":
+            pass
+        elif user_choice == "Create Wordlist":
+            pass
+        elif user_choice == "Exit":
+            print("Thanks for playing! See you next time!")
+            break
+        else:
+            print("\nInvalid selection. Please select a valid option.")
 
 display_menu()
-
-while True:
-    choice = input("Enter your selection (1-5): ")
-
-    if choice == '1':
-        play_hangman()
-        display_menu()
-    elif choice == '2':
-        choose_wordlist()
-        display_menu()
-    elif choice == '3':
-        print("\nModifying Wordlist...\n")
-        display_menu()
-    elif choice == '4':
-        print("\nCreating Wordlist...\n")
-        display_menu()
-    elif choice == '5':
-        print("\nOk, thanks for playing! See you next time!")
-        break
-    else:
-        print("\nInvalid input. Please enter a valid option (1-5).")
