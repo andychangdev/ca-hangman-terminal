@@ -1,6 +1,7 @@
 import inquirer
 from play_hangman import play_hangman
 from choose_wordlist import choose_wordlist
+from modify_wordlist import modify_wordlist
 
 print("\nWelcome to Hangman!\n")
 
@@ -21,7 +22,7 @@ def display_menu():
         elif user_choice == "Select Wordlist":
             choose_wordlist()
         elif user_choice == "Modify Wordlist":
-            pass
+            modify_wordlist()
         elif user_choice == "Create Wordlist":
             pass
         elif user_choice == "Exit":

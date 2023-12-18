@@ -40,10 +40,14 @@ def load_wordlist(filepath):
     with open(filepath, "r") as file:
         words = file.read().splitlines()
     return words
+
+def save_wordlist(filepath, wordlist):
+    with open(filepath, "w") as file:
+        file.write("\n".join(wordlist))
+    print(f'Wordlist saved in "{filepath}"\n')
     
 def modify_wordlist():
     selected_difficulty = select_difficulty()
     wordlist_filepath = select_wordlist(selected_difficulty)
     wordlist = edit_wordlist(wordlist_filepath)
-
-modify_wordlist()
+    save_wordlist(wordlist_filepath, wordlist)
