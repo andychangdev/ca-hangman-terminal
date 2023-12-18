@@ -1,5 +1,4 @@
-import os
-from wordlist_utilities import select_difficulty
+from wordlist_utilities import select_difficulty, edit_wordlist
 
 def create_wordlist():
     while True:
@@ -17,5 +16,7 @@ def create_wordlist():
             print(error)
     
     wordlist_filepath = select_difficulty()
+    wordlist = edit_wordlist(None)
+    print(wordlist)
 
 create_wordlist()
