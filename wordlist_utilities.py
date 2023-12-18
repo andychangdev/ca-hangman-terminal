@@ -45,6 +45,24 @@ def select_wordlist(difficulty):
         return None
     
 
+def prompt_user(instructions):
+    while True:
+        try:
+            prompt = [inquirer.Text("input", message=instructions)]
+            answer = inquirer.prompt(prompt)
+            user_input = answer["input"]
+            if " " in user_input:
+                raise ValueError("Invalid input. Name must not contain spaces.")
+            elif not user_input.isalpha():
+                raise ValueError("Invalid input. Name must only alphabet letters")
+            elif len(user_input) < 4:
+                raise ValueError("Invalid input. Name must contain atleast 4 letters")
+            else:
+                return user_input.lower()
+        except ValueError as error:
+            print(error)
+
+
 def display_wordlist_characters(wordlist, chars_per_line):
     current_line_length = 0
 
