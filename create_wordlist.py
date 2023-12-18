@@ -1,4 +1,4 @@
-from wordlist_utilities import select_difficulty, edit_wordlist
+from wordlist_utilities import select_difficulty, edit_wordlist, save_new_wordlist
 
 def create_wordlist():
     while True:
@@ -14,9 +14,6 @@ def create_wordlist():
                 break
         except ValueError as error:
             print(error)
-    
-    wordlist_filepath = select_difficulty()
+    wordlist_folder = select_difficulty()
     wordlist = edit_wordlist(None)
-    print(wordlist)
-
-create_wordlist()
+    save_new_wordlist(wordlist_name, wordlist_folder, wordlist)

@@ -70,6 +70,13 @@ def save_wordlist(filepath, wordlist):
         file.write("\n".join(wordlist))
     print(f'Wordlist saved in "{filepath}"\n')
 
+
+def save_new_wordlist(wordlist_name, wordlist_folder, wordlist):
+    filename = f"{wordlist_name}.txt"
+    folder_path = os.path.join('wordlists', wordlist_folder)
+    wordlist_filepath = os.path.join(folder_path, filename)
+    save_wordlist(wordlist_filepath, wordlist)
+
     
 def edit_wordlist(filepath):
     if filepath:
