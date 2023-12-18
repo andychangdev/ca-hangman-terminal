@@ -15,7 +15,7 @@ def select_difficulty():
         user_choice = selections["choice"]
         return user_choice.lower()
     except KeyError as error:
-        print(f"Error: Invalid choice - {error}")
+        print(f"Error: Invalid selection - {error}")
         return None
 
 
@@ -41,22 +41,22 @@ def select_wordlist(difficulty):
         wordlist_filepath = os.path.join(folder_path, selected_wordlist)
         return wordlist_filepath
     except KeyError as error:
-        print(f"Error: Invalid choice - {error}")
+        print(f"Error: Invalid selection - {error}")
         return None
     
 
-def prompt_user(instructions):
+def prompt_user(type, instructions):
     while True:
         try:
             prompt = [inquirer.Text("input", message=instructions)]
             answer = inquirer.prompt(prompt)
             user_input = answer["input"]
             if " " in user_input:
-                raise ValueError("Invalid input! Name must not contain spaces.\n")
+                raise ValueError(f"Error: {type} must not contain spaces.\n")
             elif not user_input.isalpha():
-                raise ValueError("Invalid input! Name must only use alphabet letters.\n")
+                raise ValueError(f"Error: {type} must only use alphabet letters.\n")
             elif len(user_input) < 4:
-                raise ValueError("Invalid input! Name must contain atleast 4 letters.\n")
+                raise ValueError(f"Error: {type} must contain atleast 4 letters.\n")
             else:
                 return user_input.lower()
         except ValueError as error:
@@ -86,14 +86,24 @@ def load_wordlist(filepath):
 def save_wordlist(filepath, wordlist):
     with open(filepath, "w") as file:
         file.write("\n".join(wordlist))
-    print(f'Wordlist saved in "{filepath}"\n')
+    print("Wordlist saved successfully!\n")
 
 
-def save_new_wordlist(wordlist_name, wordlist_folder, wordlist):
-    filename = f"{wordlist_name}.txt"
+def save_new_wordlist(wordlist_folder, wordlist):
     folder_path = os.path.join('wordlists', wordlist_folder)
-    wordlist_filepath = os.path.join(folder_path, filename)
-    save_wordlist(wordlist_filepath, wordlist)
+    existing_wordlists = os.listdir(folder_path)
+    while True:
+        wordlist_name = prompt_user("Wordlist name", "Enter a name for your wordlist")
+        filename = f"{wordlist_name}.txt"
+        try:
+            if filename in existing_wordlists:
+                raise Exception (f"Error: The wordlist '{wordlist_name}' already exists.\n")
+            else:
+                wordlist_filepath = os.path.join(folder_path, filename)
+                save_wordlist(wordlist_filepath, wordlist)
+                break
+        except Exception as error:
+                    print(error)
 
     
 def edit_wordlist(filepath):
@@ -115,10 +125,10 @@ def edit_wordlist(filepath):
         user_choice = selections["choice"]
         if user_choice == "Add Word":
             while True:
-                word = prompt_user("Enter a word to add (or enter 'quit' to stop adding)")
+                word = prompt_user("Word", "Enter a word to add (or enter 'quit' to stop adding)")
                 try:
                     if word in wordlist:
-                        raise Exception (f"Invalid Input! '{word}' already exists in wordlist.\n")
+                        raise Exception (f"Error: '{word}' already exists in wordlist.\n")
                     if word == "quit":
                         break
                     else:
@@ -128,7 +138,7 @@ def edit_wordlist(filepath):
                     print(error)
         elif user_choice == "Remove Word":
             while True:
-                word = prompt_user("Enter a word to remove (or enter 'quit' to stop removing)")
+                word = prompt_user("Word", "Enter a word to remove (or enter 'quit' to stop removing)")
                 try:
                     if word not in wordlist:
                         raise Exception (f"Error: '{word}' not found in wordlist.\n")
@@ -144,4 +154,4 @@ def edit_wordlist(filepath):
         elif user_choice == "Save and Exit":
             return wordlist
         else:
-            print("\nInvalid selection. Please select a valid option.")
+            print("\nError: Invalid selection. Please select a valid option.")

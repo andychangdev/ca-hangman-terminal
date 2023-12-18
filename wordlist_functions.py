@@ -18,7 +18,6 @@ def modify_wordlist():
 
 
 def create_wordlist():
-    wordlist_name = prompt_user("Name of your wordlist")
     wordlist_folder = select_difficulty()
     wordlist = edit_wordlist(None)
-    save_new_wordlist(wordlist_name, wordlist_folder, wordlist)
+    save_new_wordlist(wordlist_folder, wordlist)
