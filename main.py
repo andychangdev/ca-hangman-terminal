@@ -1,8 +1,7 @@
 import inquirer
 from play_hangman import play_hangman
-from choose_wordlist import choose_wordlist
-from modify_wordlist import modify_wordlist
-from create_wordlist import create_wordlist
+from wordlist_functions import choose_wordlist, modify_wordlist, create_wordlist
+
 
 print("\nWelcome to Hangman!\n")
 
