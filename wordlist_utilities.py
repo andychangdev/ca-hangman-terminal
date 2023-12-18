@@ -40,6 +40,6 @@ def select_wordlist(difficulty):
         selected_wordlist = answers["wordlist"]
         wordlist_filepath = os.path.join(folder_path, selected_wordlist)
         return wordlist_filepath
-    except KeyError as e:
-        print(f"Error: Invalid choice - {e}")
+    except KeyError as error:
+        print(f"Error: Invalid choice - {error}")
         return None
