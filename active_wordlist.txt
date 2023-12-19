@@ -1,1 +1,0 @@
-wordlists/easy/easy_wordlist.txt
