@@ -10,22 +10,14 @@ def select_difficulty():
             choices=["Easy", "Medium", "Hard"],
         ),
     ]
-    try:
-        selections = inquirer.prompt(prompt)
-        user_choice = selections["choice"]
-        return user_choice.lower()
-    except KeyError as error:
-        print(f"Error: Invalid selection - {error}")
-        return None
+    selections = inquirer.prompt(prompt)
+    user_choice = selections["choice"]
+    return user_choice.lower()
 
 
 def select_wordlist(difficulty):
     folder_path = os.path.join("wordlists", difficulty)
-    try:
-        wordlists = os.listdir(folder_path)
-    except FileNotFoundError:
-        print(f"Error: Directory '{folder_path}' not found.")
-        return None
+    wordlists = os.listdir(folder_path)
 
     choices = wordlists
     questions = [
@@ -35,14 +27,10 @@ def select_wordlist(difficulty):
             choices=choices,
         ),
     ]
-    try:
-        answers = inquirer.prompt(questions)
-        selected_wordlist = answers["wordlist"]
-        wordlist_filepath = os.path.join(folder_path, selected_wordlist)
-        return wordlist_filepath
-    except KeyError as error:
-        print(f"Error: Invalid selection - {error}")
-        return None
+    answers = inquirer.prompt(questions)
+    selected_wordlist = answers["wordlist"]
+    wordlist_filepath = os.path.join(folder_path, selected_wordlist)
+    return wordlist_filepath
 def prompt_user_options(options):
     prompt = [
             inquirer.List(
@@ -107,12 +95,12 @@ def save_new_wordlist(wordlist_folder, wordlist):
         filename = f"{wordlist_name}.txt"
         try:
             if filename in existing_wordlists:
-                raise Exception (f"Error: The wordlist '{wordlist_name}' already exists.\n")
+                raise ValueError (f"Error: The wordlist '{wordlist_name}' already exists.\n")
             else:
                 wordlist_filepath = os.path.join(folder_path, filename)
                 save_wordlist(wordlist_filepath, wordlist)
                 break
-        except Exception as error:
+        except ValueError as error:
                     print(error)
 
     
@@ -127,27 +115,27 @@ def edit_wordlist(filepath):
         user_choice = prompt_user_options(options)
         if user_choice == "Add Word":
             while True:
-                word = prompt_user_input("Word", "Enter a word to add (or enter 'quit' to stop adding)")
                 try:
+                    word = prompt_user_input("Word", "Enter a word to add (or enter 'quit' to stop adding)")
                     if word in wordlist:
-                        raise Exception (f"Error: '{word}' already exists in wordlist.\n")
+                        raise ValueError (f"Error: '{word}' already exists in wordlist.\n")
                     if word == "quit":
                         break
                     else:
                         wordlist.append(word)
                         print(f"'{word}' added to wordlist.\n")
-                except Exception as error:
+                except ValueError as error:
                     print(error)
         elif user_choice == "Remove Word":
             while True:
-                word = prompt_user_input("Word", "Enter a word to remove (or enter 'quit' to stop removing)")
                 try:
+                    word = prompt_user_input("Word", "Enter a word to remove (or enter 'quit' to stop removing)")
                     if word not in wordlist:
-                        raise Exception (f"Error: '{word}' not found in wordlist.\n")
+                        raise ValueError (f"Error: '{word}' not found in wordlist.\n")
                     else:
                         wordlist.remove(word)
                         print(f"'{word}' removed from wordlist\n")
-                except Exception as error:
+                except ValueError as error:
                     print(error)
         elif user_choice == "View Wordlist":
             print("Wordlist:\n")

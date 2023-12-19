@@ -18,14 +18,14 @@ def input_guess(available_letters, secret_letters, lives):
         try:
             user_guess = input("\nGuess a letter: ")
             if not user_guess.isalpha():
-                raise Exception("\nYou must guess a letter!")
+                raise ValueError("\nYou must guess a letter!")
             elif len(user_guess) != 1:
-                raise Exception("\nYou must only guess one letter at a time!")
+                raise ValueError("\nYou must only guess one letter at a time!")
             elif user_guess not in available_letters:
-                raise Exception("\nYou've guessed that letter already!")
+                raise ValueError("\nYou've guessed that letter already!")
             else:
                 break
-        except Exception as error:
+        except ValueError as error:
             print(error)
 
     if user_guess not in secret_letters.values():
@@ -56,7 +56,7 @@ def play_hangman():
     for index, letter in enumerate(secret_word):
         secret_letters[index] = letter
         
-    print(f"\nWelcome to Hangman!")
+    print(f"Objective: Guess the hidden word or phrase before making too many incorrect guesses.")
     print(f"\nYour word is {len(secret_letters)} letters long.")
     user_progress = ["_"] * len(secret_letters)
     print(" ".join(user_progress))
@@ -67,6 +67,8 @@ def play_hangman():
         user_guess, lives = input_guess(available_letters, secret_letters, lives)
         user_progress = update_progress(user_progress, secret_letters, user_guess)
         available_letters = update_available_letters(user_guess, available_letters)
+        print(f"\nAvailable letters:\n{available_letters}")
+
         if "".join(user_progress) == secret_word:
             print("\nCongratulations! You have guessed the word! You win!")
             break

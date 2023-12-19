@@ -15,9 +15,11 @@ def modify_wordlist():
     wordlist_filepath = select_wordlist(selected_difficulty)
     wordlist = edit_wordlist(wordlist_filepath)
     save_wordlist(wordlist_filepath, wordlist)
+    print(f"Back to Main Menu...\n")
 
 
 def create_wordlist():
     wordlist_folder = select_difficulty()
     wordlist = edit_wordlist(None)
     save_new_wordlist(wordlist_folder, wordlist)
+    print(f"Back to Main Menu...\n")
