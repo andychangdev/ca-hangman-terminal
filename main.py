@@ -1,10 +1,11 @@
 import inquirer
+from colored import Fore, Style
 from play_hangman import play_hangman
 from wordlist_functions import choose_wordlist, modify_wordlist, create_wordlist
 from wordlist_utilities import prompt_user_options
 
 
-print("\nWelcome to Hangman!\n")
+print(f"\n{Fore.orange_1}Welcome to Hangman!{Style.reset}\n")
 
 def display_menu():
     while True:

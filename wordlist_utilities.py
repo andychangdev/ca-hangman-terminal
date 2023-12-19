@@ -1,5 +1,6 @@
 import os
 import inquirer
+from colored import Fore, Style
 
 
 def select_difficulty():
@@ -50,11 +51,11 @@ def prompt_user_input(type, instructions):
             answer = inquirer.prompt(prompt)
             user_input = answer["input"]
             if " " in user_input:
-                raise ValueError(f"Error: {type} must not contain spaces.\n")
+                raise ValueError(f"{Fore.red}Error: {type} must not contain spaces.{Style.reset}\n")
             elif not user_input.isalpha():
-                raise ValueError(f"Error: {type} must only use alphabet letters.\n")
+                raise ValueError(f"{Fore.red}Error: {type} must only use alphabet letters.{Style.reset}\n")
             elif len(user_input) < 4:
-                raise ValueError(f"Error: {type} must contain atleast 4 letters.\n")
+                raise ValueError(f"{Fore.red}Error: {type} must contain atleast 4 letters.{Style.reset}\n")
             else:
                 return user_input.lower()
         except ValueError as error:
@@ -95,7 +96,7 @@ def save_new_wordlist(wordlist_folder, wordlist):
         filename = f"{wordlist_name}.txt"
         try:
             if filename in existing_wordlists:
-                raise ValueError (f"Error: The wordlist '{wordlist_name}' already exists.\n")
+                raise ValueError (f"{Fore.red}Error: The wordlist '{wordlist_name}' already exists.{Style.reset}\n")
             else:
                 wordlist_filepath = os.path.join(folder_path, filename)
                 save_wordlist(wordlist_filepath, wordlist)
@@ -118,12 +119,12 @@ def edit_wordlist(filepath):
                 try:
                     word = prompt_user_input("Word", "Enter a word to add (or enter 'quit' to stop adding)")
                     if word in wordlist:
-                        raise ValueError (f"Error: '{word}' already exists in wordlist.\n")
+                        raise ValueError (f"{Fore.red}Error: '{word}' already exists in wordlist.{Style.reset}\n")
                     if word == "quit":
                         break
                     else:
                         wordlist.append(word)
-                        print(f"'{word}' added to wordlist.\n")
+                        print(f"{Fore.green}'{word}' added to wordlist.{Style.reset}\n")
                 except ValueError as error:
                     print(error)
         elif user_choice == "Remove Word":
@@ -131,10 +132,10 @@ def edit_wordlist(filepath):
                 try:
                     word = prompt_user_input("Word", "Enter a word to remove (or enter 'quit' to stop removing)")
                     if word not in wordlist:
-                        raise ValueError (f"Error: '{word}' not found in wordlist.\n")
+                        raise ValueError (f"{Fore.red}Error: '{word}' not found in wordlist.{Style.reset}\n")
                     else:
                         wordlist.remove(word)
-                        print(f"'{word}' removed from wordlist\n")
+                        print(f"{Fore.orange_1}'{word}' removed from wordlist{Style.reset}\n")
                 except ValueError as error:
                     print(error)
         elif user_choice == "View Wordlist":
@@ -143,8 +144,8 @@ def edit_wordlist(filepath):
             print()
         elif user_choice == "Save and Exit":
             if (len(wordlist)) < 10:
-                print("Error: Wordlist must contain atleast 10 words.\n")
+                print(f"{Fore.red}Error: Wordlist must contain atleast 10 words.{Style.reset}\n")
             else: 
                 return wordlist
         else:
-            print("\nError: Invalid selection. Please select a valid option.")
+            print(f"\n{Fore.red}Error: Invalid selection. Please select a valid option.{Style.reset}")

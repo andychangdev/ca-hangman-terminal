@@ -1,3 +1,4 @@
+from colored import Fore, Style
 import random
 
 
@@ -18,11 +19,11 @@ def input_guess(available_letters, secret_letters, lives):
         try:
             user_guess = input("\nGuess a letter: ")
             if not user_guess.isalpha():
-                raise ValueError("\nYou must guess a letter!")
+                raise ValueError(f"\n{Fore.red}You must guess a letter!{Style.reset}")
             elif len(user_guess) != 1:
-                raise ValueError("\nYou must only guess one letter at a time!")
+                raise ValueError(f"\n{Fore.red}You must only guess one letter at a time!{Style.reset}")
             elif user_guess not in available_letters:
-                raise ValueError("\nYou've guessed that letter already!")
+                raise ValueError(f"\n{Fore.red}You've guessed that letter already!{Style.reset}")
             else:
                 break
         except ValueError as error:
@@ -31,7 +32,7 @@ def input_guess(available_letters, secret_letters, lives):
     if user_guess not in secret_letters.values():
         lives -= 1
         if lives > 0:
-            print(f"\nYour guess is incorrect! You only have {lives} lives left.\n")
+            print(f"\n{Fore.orange_1}Your guess is incorrect! You only have {lives} lives left.{Style.reset}\n")
     return user_guess, lives
 
 
@@ -39,7 +40,7 @@ def update_progress(user_progress, secret_letters, user_guess):
     for position, letter in secret_letters.items():
         if user_guess == letter:
             user_progress[position] = letter
-            print("\nYour guess is correct!\n")
+            print(f"\n{Fore.green}Your guess is correct!{Style.reset}\n")
     print(" ".join(user_progress))
     return user_progress
 
@@ -52,11 +53,12 @@ def update_available_letters(user_guess, available_letters):
 def play_hangman():
     words = get_active_wordlist()
     secret_word = random_word_generator(words)
+    print(secret_word)
     secret_letters = {}
     for index, letter in enumerate(secret_word):
         secret_letters[index] = letter
         
-    print(f"Objective: Guess the hidden word or phrase before making too many incorrect guesses.")
+    print(f"{Fore.cyan}Objective: Guess the hidden word or phrase before making too many incorrect guesses.{Style.reset}")
     print(f"\nYour word is {len(secret_letters)} letters long.")
     user_progress = ["_"] * len(secret_letters)
     print(" ".join(user_progress))
@@ -70,10 +72,10 @@ def play_hangman():
         print(f"\nAvailable letters:\n{available_letters}")
 
         if "".join(user_progress) == secret_word:
-            print("\nCongratulations! You have guessed the word! You win!")
+            print(f"\n{Fore.cyan}Congratulations! You have guessed the word! You win!{Style.reset}")
             break
         if lives == 0:
-            print(f"\nYou are out of luck! You lose!\nThe secret word was {secret_word.capitalize()}!")
+            print(f"\n{Fore.cyan}You are out of luck! You lose!\nThe secret word was {secret_word.capitalize()}!{Style.reset}")
             break
     
     while True:
@@ -82,7 +84,7 @@ def play_hangman():
             play_hangman()
             break
         elif restart == "no":
-            print("\nBack to Main Menu...")
+            print(f"\n{Fore.cyan}Back to Main Menu...{Style.reset}")
             break
         else:
-            print("\nInvalid input. Please enter a valid option (yes/no).")
+            print(f"\n{Fore.red}Invalid input. Please enter a valid option (yes/no).{Style.reset}")
