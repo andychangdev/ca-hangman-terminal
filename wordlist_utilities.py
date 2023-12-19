@@ -85,7 +85,6 @@ def load_wordlist(filepath):
 def save_wordlist(filepath, wordlist):
     with open(filepath, "w") as file:
         file.write("\n".join(wordlist))
-    print("Wordlist saved successfully!\n")
 
 
 def save_new_wordlist(wordlist_folder, wordlist):
@@ -131,6 +130,8 @@ def edit_wordlist(filepath):
             while True:
                 try:
                     word = prompt_user_input("Word", "Enter a word to remove (or enter 'quit' to stop removing)")
+                    if word == "quit":
+                        break
                     if word not in wordlist:
                         raise ValueError (f"{Fore.red}Error: '{word}' not found in wordlist.{Style.reset}\n")
                     else:
@@ -139,7 +140,7 @@ def edit_wordlist(filepath):
                 except ValueError as error:
                     print(error)
         elif user_choice == "View Wordlist":
-            print("Wordlist:\n")
+            print(f"{Fore.cyan}Current Wordlist:\n{Style.reset}")
             display_wordlist_characters(wordlist, 100)
             print()
         elif user_choice == "Save and Exit":
