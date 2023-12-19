@@ -5,7 +5,7 @@ from wordlist_functions import choose_wordlist, modify_wordlist, create_wordlist
 from wordlist_utilities import prompt_user_options
 
 
-print(f"\n{Fore.orange_1}Welcome to Hangman!{Style.reset}\n")
+print(f"\n{Fore.cyan}Welcome to Hangman!{Style.reset}\n")
 
 def display_menu():
     while True:
