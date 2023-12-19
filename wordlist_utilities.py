@@ -32,17 +32,20 @@ def select_wordlist(difficulty):
     selected_wordlist = answers["wordlist"]
     wordlist_filepath = os.path.join(folder_path, selected_wordlist)
     return wordlist_filepath
-def prompt_user_options(options):
+
+
+def prompt_user_options(options, instructions):
     prompt = [
             inquirer.List(
                 "choice",
-                message="Choose an option",
+                message=instructions,
                 choices=options,
             ),
         ]
     selections = inquirer.prompt(prompt)
     user_choice = selections["choice"]
     return user_choice
+
 
 def prompt_user_input(type, instructions):
     while True:
@@ -112,7 +115,7 @@ def edit_wordlist(filepath):
 
     while True:
         options = ["Add Word", "Remove Word", "View Wordlist", "Save and Exit"]
-        user_choice = prompt_user_options(options)
+        user_choice = prompt_user_options(options, "Choose an option")
         if user_choice == "Add Word":
             while True:
                 try:

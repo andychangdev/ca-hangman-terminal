@@ -1,5 +1,6 @@
-from colored import Fore, Style
 import random
+from colored import Fore, Style
+from wordlist_utilities import prompt_user_options
 
 
 def get_active_wordlist():
@@ -77,16 +78,17 @@ def play_hangman():
             print(f"\n{Fore.cyan}Congratulations! You have guessed the hidden word! You win!{Style.reset}")
             break
         if lives == 0:
-            print(f"\n{Fore.cyan}You are out of luck! You lose!\nThe hidden word was {secret_word.capitalize()}!{Style.reset}")
+            print(f"\n{Fore.cyan}You are out of lives! You lose!\nThe hidden word was {secret_word.capitalize()}!{Style.reset}\n")
             break
-    
+
     while True:
-        restart = input("\nDo you want to play again?\nEnter your selection (yes/no): ").lower()
-        if restart == "yes":
+        play_again = ["Yes", "No"]
+        user_choice = prompt_user_options(play_again, "Do you want to play again")
+        if user_choice == "Yes":
             play_hangman()
             break
-        elif restart == "no":
-            print(f"\n{Fore.cyan}Back to Main Menu...{Style.reset}\n")
+        elif user_choice == "No":
+            print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
             break
         else:
-            print(f"\n{Fore.red}Invalid input. Please enter a valid option (yes/no).{Style.reset}")
+            print(f"\n{Fore.red}Error: Please selection a valid option (yes/no).{Style.reset}")

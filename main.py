@@ -10,7 +10,7 @@ print(f"\n{Fore.cyan}Welcome to Hangman!{Style.reset}\n")
 def display_menu():
     while True:
         options = ["Play Hangman", "Select Wordlist", "Modify Wordlist", "Create Wordlist", "Exit"]
-        user_choice = prompt_user_options(options)
+        user_choice = prompt_user_options(options, "Choose an option")
         if user_choice == "Play Hangman":
             play_hangman()
         elif user_choice == "Select Wordlist":
