@@ -1,9 +1,9 @@
 import inquirer
 from pyfiglet import Figlet
 from colored import Fore, Style
-from play_hangman import play_hangman
-from wordlist_functions import choose_wordlist, modify_wordlist, create_wordlist
-from wordlist_utilities import prompt_user_options
+from game_components.play_hangman import play_hangman
+from game_components.wordlist_functions import choose_wordlist, modify_wordlist, create_wordlist
+from game_components.wordlist_utilities import prompt_user_options
 
 title = Figlet(font="standard")
 print(title.renderText("Hangman"))
