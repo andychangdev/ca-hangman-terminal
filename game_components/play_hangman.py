@@ -4,11 +4,14 @@ from game_components.wordlist_utilities import prompt_user_options, load_wordlis
 
 
 def get_active_wordlist():
-    active_wordlist_filepath = "wordlists/active_wordlist.txt"
-    with open(active_wordlist_filepath, "r") as active_file:
-        active_wordlist = active_file.read()
-    words = load_wordlist(active_wordlist)
-    return words
+    try:
+        active_wordlist_filepath = "wordlists/active_wordlist.txt"
+        with open(active_wordlist_filepath, "r") as active_file:
+            active_wordlist = active_file.read()
+        words = load_wordlist(active_wordlist)
+        return words
+    except FileNotFoundError:
+        raise
 
 
 def random_word_generator(wordlist):
@@ -55,40 +58,46 @@ def update_available_letters(user_guess, available_letters):
 
 
 def play_hangman():
-    words = get_active_wordlist()
-    secret_word = random_word_generator(words)
-    secret_letters = {}
-    for index, letter in enumerate(secret_word):
-        secret_letters[index] = letter
+    try:
+        words = get_active_wordlist()
+        secret_word = random_word_generator(words)
+        secret_letters = {}
+        for index, letter in enumerate(secret_word):
+            secret_letters[index] = letter
+            
+        print(f"{Fore.cyan}Objective: Guess the hidden word before making too many incorrect guesses.{Style.reset}")
+        print(f"\nYour word is {len(secret_letters)} letters long.")
+        user_progress = ["_"] * len(secret_letters)
+        print(" ".join(user_progress))
+        available_letters = "abcdefghijklmnopqrstuvwxyz"
+        lives = 7
+
+        while "_" in user_progress:
+            user_guess, lives = input_guess(available_letters, secret_letters, lives)
+            user_progress = update_progress(user_progress, secret_letters, user_guess)
+            available_letters = update_available_letters(user_guess, available_letters)
+            print(f"\nAvailable letters:\n{available_letters}")
+
+            if "".join(user_progress) == secret_word:
+                print(f"\n{Fore.cyan}Congratulations! You have guessed the hidden word! You win!{Style.reset}")
+                break
+            if lives == 0:
+                print(f"\n{Fore.cyan}You are out of lives! You lose!\nThe hidden word was {secret_word.capitalize()}!{Style.reset}\n")
+                break
+
+        while True:
+            play_again = ["Yes", "No"]
+            user_choice = prompt_user_options(play_again, "Do you want to play again")
+            if user_choice == "Yes":
+                play_hangman()
+                break
+            elif user_choice == "No":
+                print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
+                break
+            else:
+                print(f"\n{Fore.red}Error: Please selection a valid option (yes/no).{Style.reset}")
+    except Exception as error:
+        print(f"{Fore.red}An unexpected error occurred: {error}{Style.reset}\n")
+        print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
+        return
         
-    print(f"{Fore.cyan}Objective: Guess the hidden word before making too many incorrect guesses.{Style.reset}")
-    print(f"\nYour word is {len(secret_letters)} letters long.")
-    user_progress = ["_"] * len(secret_letters)
-    print(" ".join(user_progress))
-    available_letters = "abcdefghijklmnopqrstuvwxyz"
-    lives = 7
-
-    while "_" in user_progress:
-        user_guess, lives = input_guess(available_letters, secret_letters, lives)
-        user_progress = update_progress(user_progress, secret_letters, user_guess)
-        available_letters = update_available_letters(user_guess, available_letters)
-        print(f"\nAvailable letters:\n{available_letters}")
-
-        if "".join(user_progress) == secret_word:
-            print(f"\n{Fore.cyan}Congratulations! You have guessed the hidden word! You win!{Style.reset}")
-            break
-        if lives == 0:
-            print(f"\n{Fore.cyan}You are out of lives! You lose!\nThe hidden word was {secret_word.capitalize()}!{Style.reset}\n")
-            break
-
-    while True:
-        play_again = ["Yes", "No"]
-        user_choice = prompt_user_options(play_again, "Do you want to play again")
-        if user_choice == "Yes":
-            play_hangman()
-            break
-        elif user_choice == "No":
-            print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
-            break
-        else:
-            print(f"\n{Fore.red}Error: Please selection a valid option (yes/no).{Style.reset}")

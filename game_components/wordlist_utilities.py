@@ -25,22 +25,24 @@ def remove_ds_store(wordlists):
 
 
 def select_wordlist(difficulty):
-    folder_path = os.path.join("wordlists", difficulty)
-    wordlists = os.listdir(folder_path)
-    filtered_wordlists = remove_ds_store(wordlists)
-    choices = filtered_wordlists
-    questions = [
-        inquirer.List(
-            "wordlist",
-            message="Select a wordlist",
-            choices=choices,
-        ),
-    ]
-    answers = inquirer.prompt(questions)
-    selected_wordlist = answers["wordlist"]
-    wordlist_filepath = os.path.join(folder_path, selected_wordlist)
-    return wordlist_filepath
-
+    try:
+        folder_path = os.path.join("wordlists", difficulty)
+        wordlists = os.listdir(folder_path)
+        filtered_wordlists = remove_ds_store(wordlists)
+        choices = filtered_wordlists
+        questions = [
+            inquirer.List(
+                "wordlist",
+                message="Select a wordlist",
+                choices=choices,
+            ),
+        ]
+        answers = inquirer.prompt(questions)
+        selected_wordlist = answers["wordlist"]
+        wordlist_filepath = os.path.join(folder_path, selected_wordlist)
+        return wordlist_filepath
+    except FileNotFoundError:
+        raise
 
 def prompt_user_options(options, instructions):
     prompt = [
@@ -98,19 +100,28 @@ def display_wordlist_characters(wordlist, chars_per_line):
 
 
 def load_wordlist(filepath):
-    with open(filepath, "r") as file:
-        words = file.read().splitlines()
-    return words
+    try:
+        with open(filepath, "r") as file:
+            words = file.read().splitlines()
+        return words
+    except FileNotFoundError:
+        raise
 
 
 def save_wordlist(filepath, wordlist):
-    with open(filepath, "w") as file:
-        file.write("\n".join(wordlist))
+    try:
+        with open(filepath, "w") as file:
+            file.write("\n".join(wordlist))
+    except FileNotFoundError:
+        raise
 
 
 def save_new_wordlist(wordlist_folder, wordlist):
-    folder_path = os.path.join("wordlists", wordlist_folder)
-    existing_wordlists = os.listdir(folder_path)
+    try:
+        folder_path = os.path.join("wordlists", wordlist_folder)
+        existing_wordlists = os.listdir(folder_path)
+    except FileNotFoundError:
+        raise
     while True:
         wordlist_name = prompt_user_input(
             "Wordlist name", "Enter a name for your wordlist"
@@ -118,77 +129,80 @@ def save_new_wordlist(wordlist_folder, wordlist):
         filename = f"{wordlist_name}.txt"
         try:
             if filename in existing_wordlists:
-                raise ValueError(
+                raise FileExistsError(
                     f"{Fore.red}Error: The wordlist '{wordlist_name}' already exists.{Style.reset}\n"
                 )
             else:
                 wordlist_filepath = os.path.join(folder_path, filename)
                 save_wordlist(wordlist_filepath, wordlist)
                 break
-        except ValueError as error:
+        except FileExistsError as error:
             print(error)
 
 
 def edit_wordlist(filepath):
-    if filepath:
-        wordlist = load_wordlist(filepath)
-    else:
-        wordlist = []
-
-    while True:
-        options = ["Add Word", "Remove Word", "View Wordlist", "Save Wordlist", "Exit"]
-        user_choice = prompt_user_options(options, "Choose an option")
-        if user_choice == "Add Word":
-            while True:
-                try:
-                    word = prompt_user_input(
-                        "Word", "Enter a word to add (or enter 'quit' to stop adding)"
-                    )
-                    if word in wordlist:
-                        raise ValueError(
-                            f"{Fore.red}Error: '{word}' already exists in wordlist.{Style.reset}\n"
-                        )
-                    if word == "quit":
-                        break
-                    else:
-                        wordlist.append(word)
-                        print(f"{Fore.green}'{word}' added to wordlist.{Style.reset}\n")
-                except ValueError as error:
-                    print(error)
-        elif user_choice == "Remove Word":
-            while True:
-                try:
-                    word = prompt_user_input(
-                        "Word",
-                        "Enter a word to remove (or enter 'quit' to stop removing)",
-                    )
-                    if word == "quit":
-                        break
-                    if word not in wordlist:
-                        raise ValueError(
-                            f"{Fore.red}Error: '{word}' not found in wordlist.{Style.reset}\n"
-                        )
-                    else:
-                        wordlist.remove(word)
-                        print(
-                            f"{Fore.orange_1}'{word}' removed from wordlist{Style.reset}\n"
-                        )
-                except ValueError as error:
-                    print(error)
-        elif user_choice == "View Wordlist":
-            print(f"{Fore.cyan}Current Wordlist:\n{Style.reset}")
-            display_wordlist_characters(wordlist, 100)
-            print()
-        elif user_choice == "Save Wordlist":
-            if (len(wordlist)) < 10:
-                print(
-                    f"{Fore.red}Error: Wordlist must contain atleast 10 words.{Style.reset}\n"
-                )
-            else:
-                return wordlist
-        elif user_choice == "Exit":
-            return user_choice
+    try:
+        if filepath:
+            wordlist = load_wordlist(filepath)
         else:
-            print(
-                f"\n{Fore.red}Error: Invalid selection. Please select a valid option.{Style.reset}"
-            )
+            wordlist = []
+
+        while True:
+            options = ["Add Word", "Remove Word", "View Wordlist", "Save Wordlist", "Exit"]
+            user_choice = prompt_user_options(options, "Choose an option")
+            if user_choice == "Add Word":
+                while True:
+                    try:
+                        word = prompt_user_input(
+                            "Word", "Enter a word to add (or enter 'quit' to stop adding)"
+                        )
+                        if word in wordlist:
+                            raise ValueError(
+                                f"{Fore.red}Error: '{word}' already exists in wordlist.{Style.reset}\n"
+                            )
+                        if word == "quit":
+                            break
+                        else:
+                            wordlist.append(word)
+                            print(f"{Fore.green}'{word}' added to wordlist.{Style.reset}\n")
+                    except ValueError as error:
+                        print(error)
+            elif user_choice == "Remove Word":
+                while True:
+                    try:
+                        word = prompt_user_input(
+                            "Word",
+                            "Enter a word to remove (or enter 'quit' to stop removing)",
+                        )
+                        if word == "quit":
+                            break
+                        if word not in wordlist:
+                            raise ValueError(
+                                f"{Fore.red}Error: '{word}' not found in wordlist.{Style.reset}\n"
+                            )
+                        else:
+                            wordlist.remove(word)
+                            print(
+                                f"{Fore.orange_1}'{word}' removed from wordlist{Style.reset}\n"
+                            )
+                    except ValueError as error:
+                        print(error)
+            elif user_choice == "View Wordlist":
+                print(f"{Fore.cyan}Current Wordlist:\n{Style.reset}")
+                display_wordlist_characters(wordlist, 100)
+                print()
+            elif user_choice == "Save Wordlist":
+                if (len(wordlist)) < 10:
+                    print(
+                        f"{Fore.red}Error: Wordlist must contain atleast 10 words.{Style.reset}\n"
+                    )
+                else:
+                    return wordlist
+            elif user_choice == "Exit":
+                return user_choice
+            else:
+                print(
+                    f"\n{Fore.red}Error: Invalid selection. Please select a valid option.{Style.reset}"
+                )
+    except Exception:
+        raise
