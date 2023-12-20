@@ -2,7 +2,7 @@
   <br>
   <img src="./docs/banner.png" alt="banner"></img>
   <br>
-  Andy Chang
+  Created By: Andy Chang
   <br>
 </h1>
 
@@ -24,8 +24,6 @@
 <a href="#💻-application-walkthrough">Application Walkthrough</a> •
   <a href="#📚-references">References</a>
 </p>
-
-![screenshot](./docs/screencapture.gif)
 
 ## 💡 Purpose
 
