@@ -10,7 +10,7 @@ print(title.renderText("Hangman"))
 
 def display_menu():
     while True:
-        options = ["Play Hangman", "Select Wordlist", "Modify Wordlist", "Create Wordlist", "Exit"]
+        options = ["Play Hangman", "Select Wordlist", "Modify Wordlist", "Create Wordlist", "Exit Program"]
         user_choice = prompt_user_options(options, "Choose an option")
         if user_choice == "Play Hangman":
             play_hangman()
@@ -20,7 +20,7 @@ def display_menu():
             modify_wordlist()
         elif user_choice == "Create Wordlist":
             create_wordlist()
-        elif user_choice == "Exit":
+        elif user_choice == "Exit Program":
             print("Thanks for playing! See you next time!")
             break
         else:

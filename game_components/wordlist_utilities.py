@@ -136,7 +136,7 @@ def edit_wordlist(filepath):
         wordlist = []
 
     while True:
-        options = ["Add Word", "Remove Word", "View Wordlist", "Save and Exit"]
+        options = ["Add Word", "Remove Word", "View Wordlist", "Save Wordlist", "Exit"]
         user_choice = prompt_user_options(options, "Choose an option")
         if user_choice == "Add Word":
             while True:
@@ -179,13 +179,15 @@ def edit_wordlist(filepath):
             print(f"{Fore.cyan}Current Wordlist:\n{Style.reset}")
             display_wordlist_characters(wordlist, 100)
             print()
-        elif user_choice == "Save and Exit":
+        elif user_choice == "Save Wordlist":
             if (len(wordlist)) < 10:
                 print(
                     f"{Fore.red}Error: Wordlist must contain atleast 10 words.{Style.reset}\n"
                 )
             else:
                 return wordlist
+        elif user_choice == "Exit":
+            return user_choice
         else:
             print(
                 f"\n{Fore.red}Error: Invalid selection. Please select a valid option.{Style.reset}"

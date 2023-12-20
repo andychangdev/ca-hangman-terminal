@@ -16,14 +16,20 @@ def modify_wordlist():
     selected_difficulty = select_difficulty()
     wordlist_filepath = select_wordlist(selected_difficulty)
     wordlist = edit_wordlist(wordlist_filepath)
-    save_wordlist(wordlist_filepath, wordlist)
-    print(f"{Fore.green}Wordlist saved successfully!{Style.reset}\n")
-    print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
+    if wordlist == "Exit":
+        return
+    else:
+        save_wordlist(wordlist_filepath, wordlist)
+        print(f"{Fore.green}Wordlist saved successfully!{Style.reset}\n")
+        print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
 
 
 def create_wordlist():
     wordlist_folder = select_difficulty()
     wordlist = edit_wordlist(None)
-    save_new_wordlist(wordlist_folder, wordlist)
-    print(f"\n{Fore.green}Wordlist saved successfully!{Style.reset}\n")
-    print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
+    if wordlist == "Exit":
+        return
+    else:
+        save_new_wordlist(wordlist_folder, wordlist)
+        print(f"\n{Fore.green}Wordlist saved successfully!{Style.reset}\n")
+        print(f"{Fore.cyan}Back to Main Menu...{Style.reset}\n")
