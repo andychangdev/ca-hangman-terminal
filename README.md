@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="./docs/readme-banner.png" alt="banner"></img>
+  <img src="./docs/banner.png" alt="banner"></img>
   <br>
   Andy Chang
   <br>
@@ -34,22 +34,20 @@
 
 1. **Play Hangman**
     
-    The quick brown fox jumped over the lazy dog
+    This feature allows the user to play Hangman. The game will generate a random hidden word for the user to guess. The user has a total of 7 lives to guess the hidden word.
 
 2. **Select Wordlist**
 
-    The quick brown fox jumped over the lazy dog
+    This feature allows the user to select a word list of their choice. Wordlists are categorised by difficulty: easy, medium, and hard.
 
 3. **Modify Wordlist**
 
-    The quick brown fox jumped over the lazy dog
+    This feature allows the user to modify wordlists. The user can select which word list to modify and then add or remove words from the selected word list. After modifying the word list, it will be saved for future use.
 
 4.  **Create Wordlist**
 
-    The quick brown fox jumped over the lazy dog
+    This feature allows the user to create their own wordlist. The user can add new or remove words to or from the wordlist. After creating their word list, they can name it and save it for future use.
 
-> **Note:**
-> Extra Notes
 
 ## 📀 Installation Guide
 
@@ -66,7 +64,7 @@
 
 1. **Download the Git Repository**
 
-    Download the repository by pressing on the green "< > code" button then press 'Download ZIP'. 
+    Download the repository by pressing on the green "< > code" button then press "Download ZIP". 
     
     You can also run the following command in your preferred terminal application to clone the repository:
     ```bash
@@ -104,23 +102,30 @@
 
 This terminal application adheres to the Python Enhancement Proposal 8 (PEP 8) coding style guide, established by Guido van Rossum, Barry Warsaw, and Nick Coghlan.
 
-
 ### App Dependencies
 
 ```
 blessed==1.20.0
 colored==2.2.3
 inquirer==3.1.4
+pyfiglet==1.0.2
 python-editor==1.0.4
 readchar==4.0.5
 six==1.16.0
 wcwidth==0.2.12
 ```
 
-### Third Party Resources
+### Third Party Packages
 This terminal application uses the following third-party resources:
 
 - [Inquirer](https://pypi.org/project/inquirer/)
 - [Colored](https://pypi.org/project/colored/)
+- [Pyfiglet](https://pypi.org/project/pyfiglet/)
+
+### Third Party Resources
+
+1. Nate Babaev 2022, 5 Python Libraries for Building Command Line Tools, online video, viewed 17 December 2023, https://www.youtube.com/watch?v=20Qkq93kwKw
+
+2. Rossum, G 2001, 'PEP 8 - Style Guide for Python Code', Python Enhancement Proposal, 05 July, viewed 16 December, https://peps.python.org/pep-0008/
 
 
