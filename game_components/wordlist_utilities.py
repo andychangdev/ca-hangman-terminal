@@ -44,6 +44,7 @@ def select_wordlist(difficulty):
     except FileNotFoundError:
         raise
 
+
 def prompt_user_options(options, instructions):
     prompt = [
         inquirer.List(
@@ -99,6 +100,13 @@ def display_wordlist_characters(wordlist, chars_per_line):
     print()
 
 
+def get_filename_without_extension(file):
+    filepath = file
+    filename = os.path.basename(filepath)
+    filename_without_extension = os.path.splitext(filename)[0]
+    return filename_without_extension
+
+
 def load_wordlist(filepath):
     try:
         with open(filepath, "r") as file:
@@ -116,7 +124,7 @@ def save_wordlist(filepath, wordlist):
         raise
 
 
-def save_new_wordlist(wordlist_folder, wordlist):
+def name_wordlist(wordlist_folder, wordlist):
     try:
         folder_path = os.path.join("wordlists", wordlist_folder)
         existing_wordlists = os.listdir(folder_path)
@@ -134,8 +142,7 @@ def save_new_wordlist(wordlist_folder, wordlist):
                 )
             else:
                 wordlist_filepath = os.path.join(folder_path, filename)
-                save_wordlist(wordlist_filepath, wordlist)
-                break
+                return wordlist_filepath
         except FileExistsError as error:
             print(error)
 
@@ -188,7 +195,7 @@ def edit_wordlist(filepath):
                     except ValueError as error:
                         print(error)
             elif user_choice == "View Wordlist":
-                print(f"{Fore.cyan}Current Wordlist:\n{Style.reset}")
+                print(f"{Fore.green}Current Wordlist:\n{Style.reset}")
                 display_wordlist_characters(wordlist, 100)
                 print()
             elif user_choice == "Save Wordlist":
