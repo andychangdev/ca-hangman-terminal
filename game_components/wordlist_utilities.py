@@ -61,7 +61,11 @@ def prompt_user_input(type, instructions):
             prompt = [inquirer.Text("input", message=instructions)]
             answer = inquirer.prompt(prompt)
             user_input = answer["input"]
-            if " " in user_input:
+            if user_input == "":
+                raise ValueError(
+                    f"{Fore.red}Error: Input field cannot be empty.{Style.reset}\n"
+                )
+            elif " " in user_input:
                 raise ValueError(
                     f"{Fore.red}Error: {type} must not contain spaces.{Style.reset}\n"
                 )
