@@ -1,18 +1,17 @@
 import random
 from colored import Fore, Style
-from wordlist_utilities import prompt_user_options
+from wordlist_utilities import prompt_user_options, load_wordlist
 
 
 def get_active_wordlist():
     with open("active_wordlist.txt", "r") as active_file:
         active_wordlist = active_file.read()
-    with open(active_wordlist, "r") as file:
-        words = file.read().splitlines()
+    words = load_wordlist(active_wordlist)
     return words
 
 
-def random_word_generator(word_list):
-    return random.choice(word_list)
+def random_word_generator(wordlist):
+    return random.choice(wordlist)
 
 
 def input_guess(available_letters, secret_letters, lives):
