@@ -1,5 +1,5 @@
 from colored import Fore, Style
-from wordlist_utilities import select_difficulty, select_wordlist, edit_wordlist, save_new_wordlist, save_wordlist
+from game_components.wordlist_utilities import select_difficulty, select_wordlist, edit_wordlist, save_new_wordlist, save_wordlist
 
 
 def choose_wordlist():

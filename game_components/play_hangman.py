@@ -1,6 +1,6 @@
 import random
 from colored import Fore, Style
-from wordlist_utilities import prompt_user_options, load_wordlist
+from game_components.wordlist_utilities import prompt_user_options, load_wordlist
 
 
 def get_active_wordlist():
