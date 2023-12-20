@@ -1,6 +1,6 @@
 import random
 from colored import Fore, Style
-from game_components.wordlist_utilities import prompt_user_options, load_wordlist
+from game_components.wordlist_utilities import prompt_user_options, load_wordlist, get_filename_without_extension
 
 
 def get_active_wordlist():
@@ -9,7 +9,7 @@ def get_active_wordlist():
         with open(active_wordlist_filepath, "r") as active_file:
             active_wordlist = active_file.read()
         words = load_wordlist(active_wordlist)
-        return words
+        return words, active_wordlist
     except FileNotFoundError:
         raise
 
@@ -59,13 +59,15 @@ def update_available_letters(user_guess, available_letters):
 
 def play_hangman():
     try:
-        words = get_active_wordlist()
+        words, active_wordlist = get_active_wordlist()
+        wordlist_name = get_filename_without_extension(active_wordlist)
         secret_word = random_word_generator(words)
         secret_letters = {}
         for index, letter in enumerate(secret_word):
             secret_letters[index] = letter
             
-        print(f"{Fore.cyan}Objective: Guess the hidden word before making too many incorrect guesses.{Style.reset}")
+        print(f"{Fore.cyan}Objective: Guess the hidden word before making too many incorrect guesses.{Style.reset}\n")
+        print(f"{Fore.green}Current Wordlist: '{wordlist_name}'{Style.reset}")
         print(f"\nYour word is {len(secret_letters)} letters long.")
         user_progress = ["_"] * len(secret_letters)
         print(" ".join(user_progress))
