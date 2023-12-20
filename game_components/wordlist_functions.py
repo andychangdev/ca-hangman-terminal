@@ -5,7 +5,8 @@ from game_components.wordlist_utilities import select_difficulty, select_wordlis
 def choose_wordlist():
     selected_difficulty = select_difficulty()
     selected_wordlist_filepath = select_wordlist(selected_difficulty)
-    with open("active_wordlist.txt", 'w') as file:
+    active_wordlist_filepath = "wordlists/active_wordlist.txt"
+    with open(active_wordlist_filepath, 'w') as file:
         file.write(selected_wordlist_filepath)
     print(f"{Fore.green}Wordlist selected!{Style.reset}")
     print(f"\n{Fore.cyan}Back to Main Menu...{Style.reset}\n")

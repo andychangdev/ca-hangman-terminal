@@ -4,7 +4,8 @@ from game_components.wordlist_utilities import prompt_user_options, load_wordlis
 
 
 def get_active_wordlist():
-    with open("active_wordlist.txt", "r") as active_file:
+    active_wordlist_filepath = "wordlists/active_wordlist.txt"
+    with open(active_wordlist_filepath, "r") as active_file:
         active_wordlist = active_file.read()
     words = load_wordlist(active_wordlist)
     return words
