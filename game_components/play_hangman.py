@@ -1,6 +1,6 @@
 import random
 from colored import Fore, Style
-from game_components.wordlist_utilities import prompt_user_options, load_wordlist, get_filename_without_extension
+from game_components.wordlist_utilities import prompt_user_options, load_wordlist, get_filename_without_extension, get_difficulty_folder_name
 
 
 def get_active_wordlist():
@@ -61,13 +61,15 @@ def play_hangman():
     try:
         words, active_wordlist = get_active_wordlist()
         wordlist_name = get_filename_without_extension(active_wordlist)
+        difficulty = get_difficulty_folder_name(active_wordlist)
         secret_word = random_word_generator(words)
         secret_letters = {}
         for index, letter in enumerate(secret_word):
             secret_letters[index] = letter
             
         print(f"{Fore.cyan}Objective: Guess the hidden word before making too many incorrect guesses.{Style.reset}\n")
-        print(f"{Fore.green}Current Wordlist: '{wordlist_name}'{Style.reset}")
+        print(f"{Fore.cyan}Current Wordlist: '{wordlist_name}'{Style.reset}")
+        print(f"{Fore.cyan}Difficulty: {difficulty.capitalize()}{Style.reset}")
         print(f"\nYour word is {len(secret_letters)} letters long.")
         user_progress = ["_"] * len(secret_letters)
         print(" ".join(user_progress))

@@ -106,6 +106,11 @@ def get_filename_without_extension(file):
     filename_without_extension = os.path.splitext(filename)[0]
     return filename_without_extension
 
+def get_difficulty_folder_name(path):
+    folder_path = os.path.dirname(path)
+    difficulty = os.path.basename(folder_path) 
+    return difficulty
+
 
 def load_wordlist(filepath):
     try:
