@@ -21,6 +21,7 @@
   <a href="#💡-purpose">Purpose</a> •
   <a href="#⚙️-functionality">Functionality</a> •
   <a href="#📀-installation-guide">Installation Guide</a> •
+<a href="#💻-application-walkthrough">Application Walkthrough</a> •
   <a href="#📚-references">References</a>
 </p>
 
@@ -48,7 +49,6 @@
 
     This feature allows the user to create their own wordlist. The user can add new or remove words to or from the wordlist. After creating their word list, they can name it and save it for future use.
 
-
 ## 📀 Installation Guide
 
 ### System Requirements
@@ -56,15 +56,15 @@
 
     MacOS 10.13 or later and Windows 10 or later
 
-- **Ensure Python is Installed**
-
-    Before following the installation steps, ensure that Python is installed on your computer. If Python is not installed, you can download it from the official Python website and follow the installation instructions specific to your operating system.
+- **Python Version:**
+    
+    Python 3.9.x or higher is recommended for running this application.
 
 ### Installation Steps
 
 1. **Download the Git Repository**
 
-    Download the repository by pressing on the green "< > code" button then press "Download ZIP". 
+    Download the Git repository by clicking on the green "< > code" button, then click "Download ZIP". 
     
     You can also run the following command in your preferred terminal application to clone the repository:
     ```bash
@@ -75,14 +75,23 @@
 
      Using your file explorer (Finder or Explorer), locate the folder where you downloaded or cloned the repository.
 
-    You can also run the following command to change the working directory to the application directory:
+    You can also run the following command after cloning the repository to change the working directory to the application directory:
     ```bash
     cd AndyChang_T1A3
+    ```
+3. **Ensure Python 3 is installed**
+
+    Before installing the application, ensure that Python 3 is installed on your computer. If Python 3 is not installed, you can download it from the official Python website and follow the installation instructions specific to your operating system. 
+
+    You can double-click on the `check_python.sh` script within the application folder to check if you have Python 3 installed. You can also run the following command to check if Python 3 is installed:
+
+    ```bash
+    bash check_python.sh
     ```
 
 3. **Run the Installation Script**
 
-    Double-click on the `install.sh` script within the application folder. This action will initiate the setup process for the Hangman game.
+    After checking Python 3 is installed, double-click on the `install.sh` script within the application folder. This action will initiate the setup process for the Hangman game.
 
     You can also run the following command to execute the installation script:
 
@@ -90,11 +99,19 @@
     bash install.sh
     ```
 
-
-
 4. **Play the Game**
 
-    Once the installation is complete, the Hangman game will start automatically. Follow the on-screen instructions to play the game.
+    Once the installation is complete, double-click on the `hangman.sh` to run the game.
+
+    You can also run the following command to run the game:
+
+    ```bash
+    bash hangman.sh
+    ```
+
+## 💻 Application Walkthrough
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 ## 📚 References
 
