@@ -44,7 +44,7 @@ def create_wordlist():
         if wordlist == "Exit":
             return
         else:
-            wordlist_filepath = name_wordlist(wordlist_folder, wordlist)
+            wordlist_filepath = name_wordlist(wordlist_folder)
             save_wordlist(wordlist_filepath, wordlist)
             filename = get_filename_without_extension(wordlist_filepath)
             print(f"\n{Fore.green}Wordlist '{filename}' saved successfully!{Style.reset}\n")

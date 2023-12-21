@@ -3,48 +3,6 @@ import inquirer
 from colored import Fore, Style
 
 
-def select_difficulty():
-    prompt = [
-        inquirer.List(
-            "choice",
-            message="Select a difficulty level",
-            choices=["Easy", "Medium", "Hard"],
-        ),
-    ]
-    selections = inquirer.prompt(prompt)
-    user_choice = selections["choice"]
-    return user_choice.lower()
-
-
-def remove_ds_store(wordlists):
-    filtered_wordlists = []
-    for file in wordlists:
-        if file != ".DS_Store":
-            filtered_wordlists.append(file)
-    return filtered_wordlists
-
-
-def select_wordlist(difficulty):
-    try:
-        folder_path = os.path.join("wordlists", difficulty)
-        wordlists = os.listdir(folder_path)
-        filtered_wordlists = remove_ds_store(wordlists)
-        choices = filtered_wordlists
-        questions = [
-            inquirer.List(
-                "wordlist",
-                message="Select a wordlist",
-                choices=choices,
-            ),
-        ]
-        answers = inquirer.prompt(questions)
-        selected_wordlist = answers["wordlist"]
-        wordlist_filepath = os.path.join(folder_path, selected_wordlist)
-        return wordlist_filepath
-    except FileNotFoundError:
-        raise
-
-
 def prompt_user_options(options, instructions):
     prompt = [
         inquirer.List(
@@ -84,6 +42,32 @@ def prompt_user_input(type, instructions):
                 return user_input.lower()
         except ValueError as error:
             print(error)
+
+
+def remove_ds_store(wordlists):
+    filtered_wordlists = []
+    for file in wordlists:
+        if file != ".DS_Store":
+            filtered_wordlists.append(file)
+    return filtered_wordlists
+
+
+def select_difficulty():
+    options = ["Easy", "Medium", "Hard"]
+    user_choice = prompt_user_options(options, "Select a difficulty level")
+    return user_choice.lower()
+
+
+def select_wordlist(difficulty):
+    try:
+        folder_path = os.path.join("wordlists", difficulty)
+        wordlists = os.listdir(folder_path)
+        options = remove_ds_store(wordlists)
+        selected_wordlist = prompt_user_options(options, "Select a wordlist")
+        wordlist_filepath = os.path.join(folder_path, selected_wordlist)
+        return wordlist_filepath
+    except FileNotFoundError:
+        raise
 
 
 def display_wordlist_characters(wordlist, chars_per_line):
@@ -129,7 +113,7 @@ def save_wordlist(filepath, wordlist):
         raise
 
 
-def name_wordlist(wordlist_folder, wordlist):
+def name_wordlist(wordlist_folder):
     try:
         folder_path = os.path.join("wordlists", wordlist_folder)
         existing_wordlists = os.listdir(folder_path)
