@@ -12,7 +12,7 @@
  </h3>
 
  <h3 align="center">
-<a href="https://www.canva.com">🎬 Presentation Video</a>
+<a href="https://www.canva.com/design/DAF3j9FNHJM/jwz-DhhOMIf4-pWa4cK31A/view?utm_content=DAF3j9FNHJM&utm_campaign=designshare&utm_medium=link&utm_source=recording_view">🎬 Presentation Video</a>
  </h3>
 
 <h2 align="center">Documentation for T1A3 - Terminal Application</h4>
@@ -21,7 +21,6 @@
   <a href="#💡-purpose">Purpose</a> •
   <a href="#⚙️-functionality">Functionality</a> •
   <a href="#📀-installation-guide">Installation Guide</a> •
-<a href="#💻-application-walkthrough">Application Walkthrough</a> •
   <a href="#📚-references">References</a>
 </p>
 
@@ -52,7 +51,7 @@
 ### System Requirements
 - **Operating System:**
 
-    MacOS 10.13 or later and Windows 10 or later
+    MacOS 10.13 or later
 
 - **Python Version:**
     
@@ -107,10 +106,6 @@
     bash hangman.sh
     ```
 
-## 💻 Application Walkthrough
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
 ## 📚 References
 
 ### Code Style Guide
@@ -142,5 +137,4 @@ This terminal application uses the following third-party resources:
 1. Nate Babaev 2022, 5 Python Libraries for Building Command Line Tools, online video, viewed 17 December 2023, https://www.youtube.com/watch?v=20Qkq93kwKw
 
 2. Rossum, G 2001, 'PEP 8 - Style Guide for Python Code', Python Enhancement Proposal, 05 July, viewed 16 December, https://peps.python.org/pep-0008/
-
 
