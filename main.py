@@ -24,6 +24,6 @@ def display_menu():
             print("Thanks for playing! See you next time!")
             break
         else:
-            print("\nInvalid selection. Please select a valid option.")
+            print(f"\n{Fore.red}Error: Invalid selection. Please select a valid option. {Style.reset}")
 
 display_menu()
