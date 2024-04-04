@@ -65,7 +65,7 @@
     
     You can also run the following command in your preferred terminal application to clone the repository:
     ```bash
-    git clone https://github.com/andychangdev/AndyChang_T1A3.git
+    git clone https://github.com/andychangdev/ca-hangman-terminal.git
     ```
 
 2. **Navigate to the Application Directory**
@@ -74,7 +74,7 @@
 
     You can also run the following command after cloning the repository to change the working directory to the application directory:
     ```bash
-    cd AndyChang_T1A3
+    cd ca-hangman-terminal
     ```
 3. **Ensure Python 3 is installed**
 
