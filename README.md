@@ -1,26 +1,12 @@
-<h1 align="center">
-  <br>
-  <img src="./docs/banner.png" alt="banner"></img>
-  <br>
-  Created By: Andy Chang
-  <br>
-</h1>
+<img src="./docs/banner.jpg" alt="banner"></img>
 
-<h3 align="center">
- <h3 align="center">
-<a href="https://github.com/andychangdev/AndyChang_T1A3">📦 Github Repo</a>
- </h3>
-
- <h3 align="center">
-<a href="https://www.canva.com/design/DAF3j9FNHJM/jwz-DhhOMIf4-pWa4cK31A/view?utm_content=DAF3j9FNHJM&utm_campaign=designshare&utm_medium=link&utm_source=recording_view">🎬 Presentation Video</a>
- </h3>
-
-<h2 align="center">Documentation for T1A3 - Terminal Application</h4>
+<h1 align="center">Documentation for Hangman CLI Terminal Application</h1>
 
 <p align="center">
   <a href="#💡-purpose">Purpose</a> •
   <a href="#⚙️-functionality">Functionality</a> •
   <a href="#📀-installation-guide">Installation Guide</a> •
+  <a href="#📝-development-logs">Development Logs</a> •
   <a href="#📚-references">References</a>
 </p>
 
@@ -105,6 +91,31 @@
     ```bash
     bash hangman.sh
     ```
+
+## 📝 Development Logs
+
+### Implementation Plan
+
+![screenshot](./docs/trello_screenshots/trello_userboard1.jpg)
+![screenshot](./docs/trello_screenshots/trello_userboard2.jpg)
+![screenshot](./docs/trello_screenshots/trello_userboard3.jpg)
+![screenshot](./docs/trello_screenshots/trello_userboard4.jpg)
+![screenshot](./docs/trello_screenshots/trello_userboard5.jpg)
+![screenshot](./docs/trello_screenshots/trello_userboard6.jpg)
+![screenshot](./docs/trello_screenshots/trello_main_menu.jpg)
+![screenshot](./docs/trello_screenshots/trello_play_hangman.jpg)
+![screenshot](./docs/trello_screenshots/trello_multiple_wordlist.jpg)
+![screenshot](./docs/trello_screenshots/trello_modify_wordlist.jpg)
+![screenshot](./docs/trello_screenshots/trello_create_wordlist.jpg)
+![screenshot](./docs/trello_screenshots/trello_run_application.jpg)
+![screenshot](./docs/trello_screenshots/trello_documentation.jpg)
+![screenshot](./docs/trello_screenshots/trello_git.jpg)
+
+
+
+### Manual Testing
+![screenshot](./docs/manual_testing/19_12_23_manual_test.png)
+![screenshot](./docs/manual_testing/20-12-23_manual_test.png)
 
 ## 📚 References
 
